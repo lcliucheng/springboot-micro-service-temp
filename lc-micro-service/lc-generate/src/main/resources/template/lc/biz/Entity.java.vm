@@ -1,0 +1,58 @@
+package ${packagePath}.service.${packagePath2}.biz.domain.entity.db.${moduleName};
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.annotation.TableId;
+#if(${hasDateTime})
+import java.time.LocalDateTime;
+#end
+import com.baomidou.mybatisplus.annotation.TableField;
+import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+
+/**
+ * <p>
+ * ${comments}
+ * </p>
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName("${tableName}")
+@ApiModel(value="${className}对象", description="")
+public class ${className} extends Model<${className}> {
+
+    private static final long serialVersionUID = 1L;
+
+    #foreach ($column in $columns)
+
+        #if($column.columnName == $pk.columnName)
+        @TableId(value = "$column.columnName", type = IdType.AUTO)
+        #else
+        @TableField("$column.columnName")
+        #end
+    @ApiModelProperty(value = "$column.comments")
+    private $column.attrType $column.attrname;
+    #end
+
+
+
+
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
+
+}

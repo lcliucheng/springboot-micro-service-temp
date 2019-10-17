@@ -1,0 +1,29 @@
+package ${packagePath}.service.tourism.biz.web.${moduleName};
+
+
+import ${packagePath}.data.mybatis.web.BaseController;
+import ${packagePath}.service.${packagePath2}.biz.domain.entity.db.${moduleName}.${className};
+import ${packagePath}.service.${packagePath2}.biz.service.db.${moduleName}.IUserAddressService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+/**
+ * <p>
+ * ${comments}
+ * </p>
+ *
+ * @author ${author}
+ * @email ${email}
+ * @since ${datetime}
+ */
+@RestController
+@RequestMapping("/${moduleName}/${pathName}")
+public class ${className}Controller extends BaseController<${className}Service, ${className}, Long> {
+    private final I${className}Service ${classname}Service;
+
+    public ${className}Controller(final I${className}Service ${classname}Service) {
+        super (${classname}Service);
+        this.${classname}Service = ${classname}Service;
+    }
+}

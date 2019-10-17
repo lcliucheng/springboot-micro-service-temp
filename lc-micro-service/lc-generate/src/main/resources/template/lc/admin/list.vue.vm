@@ -1,0 +1,128 @@
+<template>
+    <div class="app-container">
+        <div class="filter-container">
+
+            <el-button v-if="checkPermission('')"  style="margin-left: 30px;" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+            <el-button v-if="checkPermission('')" style="margin-left: 10px; " type="primary" icon="el-icon-edit" @click="handleCreate">新增</el-button>
+        </div>
+
+        <el-table
+                v-loading="listLoading"
+                :data="list"
+                border
+                fit
+                highlight-current-row
+                style="width: 100%;"
+                @sort-change="sortChange">
+
+        #foreach ($column in $columns)
+            <el-table-column label="$column.comments" prop=" $column.attrname" align="center">
+            </el-table-column>
+        #end
+
+            <el-table-column :label="\$t('table.actions')" align="center" width="230" class-name="small-padding fixed-width">
+                <template slot-scope="{row}">
+                    <el-button v-if="checkPermission('')" type="primary" size="mini" @click="handleUpdate(row)">编辑</el-button>
+                    <el-button v-if="checkPermission('')"  size="mini" type="danger" @click="handleDelete(row)">删除</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+
+        <pagination align="right"  :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
+
+    </div>
+</template>
+
+<script>
+
+    import Pagination from '@/components/Pagination' //重写分页插件
+    import bxUtils from '@/utils/zzjr-bx-utils'
+
+    export default {
+        components: { Pagination },
+        data() {
+            return {
+                list: null,
+                total: 0,
+                listLoading: true,
+                listQuery: {
+                    page: 1,
+                    size: 10,
+                },
+                sortBy:[]
+            }
+        },
+        created() {
+            this.getList()
+        },
+        methods: {
+            getList() {
+                this.listLoading = true;
+                //查询条件
+                let param = {
+                    page: this.listQuery.page,
+                    size: this.listQuery.size,
+                    sort:this.sortBy,
+                };
+                //请求后台接口
+                this.\$axios.get( '/${moduleName}/${pathName}',{params: param,
+                    paramsSerializer: function(params) {
+                        //请求前参数处理，主要处理数组类型
+                        return bxUtils.preDeal(params);
+                    }}).then(response => {
+                    if(response.code == 200){
+                        this.list = response.data.records;
+                        this.total = parseInt(response.data.total);
+                    }else{
+                        this.\$message({message: response.msg || "查询失败", type: 'error'})
+                    }
+                    this.listLoading = false;
+                })
+            },
+            handleFilter() {
+                this.listQuery.page = 1;
+                this.getList();
+            },
+            sortChange(data) {
+                const { prop, order } = data;
+                this.sortBy = [];
+                if(prop != null){
+                    if(order == 'ascending'){
+                        this.sortBy.push(prop+',asc');
+                    }else{
+                        this.sortBy.push(prop+',desc');
+                    }
+                }
+                this.handleFilter();
+            },
+            handleCreate() {
+                this.\$router.push({path:'/${moduleName}/${pathName}/edit'});
+            },
+            handleUpdate(row) {
+                this.\$router.push({path:'/${moduleName}/${pathName}/edit',query: {id: row.id}});
+            },
+            handleDelete(row) {
+                this.\$confirm('删除记录, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.\$axios.delete( '/${moduleName}/${pathName}/'+row.id).then(response => {
+                        if(response.code == 200){
+                            this.\$message({type: 'success', message: '删除成功!'});
+                            this.getList();
+                        }else{
+                            this.\$message({type: 'success', message: '删除失败!'});
+                        }
+
+                    });
+                }).catch(() => {
+                    this.\$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+            }
+        }
+    }
+</script>

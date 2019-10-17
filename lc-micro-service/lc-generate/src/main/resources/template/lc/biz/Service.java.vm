@@ -1,0 +1,18 @@
+package ${packagePath}.service.${packagePath2}.biz.service.db.${moduleName};
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import ${packagePath}.service.${packagePath2}.biz.domain.entity.db.${moduleName}.${className};
+
+/**
+ * <p>
+ * ${comments}
+ * </p>
+ *
+ * @author ${author}
+ * @email ${email}
+ * @since ${datetime}
+ */
+public interface ${className}Service extends IService<${className}> {
+
+
+}

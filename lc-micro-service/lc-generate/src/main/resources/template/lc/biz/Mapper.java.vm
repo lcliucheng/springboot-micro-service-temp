@@ -1,0 +1,17 @@
+package ${packagePath}.tourism.${packagePath2}.mapper;
+
+import ${packagePath}.tourism.${packagePath2}.entity.${className};
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ * <p>
+ *  ${comments}
+ * </p>
+ *
+ * @author ${author}
+ * @email ${email}
+ * @since ${datetime}
+ */
+public interface ${className}Mapper extends BaseMapper<${className}> {
+
+}

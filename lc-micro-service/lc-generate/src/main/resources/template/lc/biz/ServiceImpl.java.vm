@@ -1,0 +1,22 @@
+package ${packagePath}.service.${packagePath2}.biz.service.db.${moduleName}.impl;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import ${packagePath}.service.${packagePath2}.biz.domain.entity.db.${moduleName}.${className};
+import ${packagePath}.service.${packagePath2}.biz.repository.db.${moduleName}.${className}Mapper;
+import ${packagePath}.service.${packagePath2}.biz.service.db.${moduleName}.I${className}Service;
+import org.springframework.stereotype.Service;
+
+
+/**
+ * <p>
+ * ${comments}
+ * </p>
+ *
+ * @author ${author}
+ * @email ${email}
+ * @since ${datetime}
+ */
+@Service
+public class ${className}ServiceImpl extends ServiceImpl<${className}Mapper, ${className}> implements I${className}Service {
+
+}
