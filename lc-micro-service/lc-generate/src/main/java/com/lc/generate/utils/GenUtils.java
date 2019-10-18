@@ -35,15 +35,21 @@ public class GenUtils {
     public static List<String> getTemplates() {
         List<String> templates = new ArrayList<String> ();
         templates.add ("template/lc/biz/Entity.java.vm");
-	/*	templates.add("template/Dao.java.vm");
-		templates.add("template/Dao.xml.vm");*/
         templates.add ("template/lc/biz/Service.java.vm");
         templates.add ("template/lc/biz/ServiceImpl.java.vm");
         templates.add ("template/lc/biz/Controller.java.vm");
         templates.add ("template/lc/biz/Mapper.java.vm");
-	/*	templates.add("template/list.html.vm");
-		templates.add("template/list.js.vm");
-		templates.add("template/menu.sql.vm");*/
+
+        templates.add ("template/lc/admin/list.vue.vm");
+        templates.add ("template/lc/admin/edit.vue.vm");
+        templates.add ("template/lc/admin/Controller.java.ad.vm");
+        templates.add ("template/lc/admin/DTO.java.ad.vm");
+        templates.add ("template/lc/admin/Request.java.ad.vm");
+        templates.add ("template/lc/admin/Service.java.ad.vm");
+        templates.add ("template/lc/admin/ServiceFallbackImpl.java.ad.vm");
+        templates.add ("template/lc/admin/menu.sql.ad.vm");
+
+
         return templates;
     }
 
@@ -55,6 +61,8 @@ public class GenUtils {
         //配置信息
         Configuration config = getConfig ();
         boolean hasBigDecimal = false;
+        boolean hasDateTime=false;
+        boolean hasDate=false;
         //表信息
         TableEntity tableEntity = new TableEntity ();
         tableEntity.setTableName (table.get ("tableName"));
@@ -83,6 +91,12 @@ public class GenUtils {
             columnEntity.setAttrType (attrType);
             if (!hasBigDecimal && attrType.equals ("BigDecimal")) {
                 hasBigDecimal = true;
+            }
+            if(!hasDateTime&&attrType.equals ("LocalDateTime")){
+                hasDateTime=true;
+            }
+            if(!hasDate&&attrType.equals ("LocalDate")){
+                hasDate=true;
             }
             //是否主键
             if ("PRI".equalsIgnoreCase (column.get ("columnKey")) && tableEntity.getPk () == null) {
@@ -116,6 +130,8 @@ public class GenUtils {
         map.put ("pathName", tableEntity.getClassname ().toLowerCase ());
         map.put ("columns", tableEntity.getColumns ());
         map.put ("hasBigDecimal", hasBigDecimal);
+        map.put ("hasDateTime", hasDateTime);
+        map.put ("hasDate", hasDate);
         map.put ("mainPath", mainPath);
         map.put ("package", config.getString ("package"));
         map.put ("moduleName", config.getString ("moduleName"));
@@ -123,7 +139,9 @@ public class GenUtils {
         map.put ("email", config.getString ("email"));
         map.put ("packagePath", config.getString ("mainPath"));
         map.put ("packagePath2", config.getString ("mainPath2"));
+        map.put ("packagePath3", config.getString ("mainPath2").toUpperCase ());
         map.put ("datetime", DateUtils.format (new Date (), DateUtils.DATE_TIME_PATTERN));
+        map.put ("vueSymbolOne",config.getString ("vueSymbolOne"));
         VelocityContext context = new VelocityContext (map);
 
         //获取模板列表
@@ -186,56 +204,66 @@ public class GenUtils {
         }
 
         if (template.contains ("Entity.java.vm")) {
-            return packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "domain" +File.separator+"entity"+ File.separator + "db" + File.separator + moduleName + File.separator +  className + ".java";
+            return "biz"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "domain" +File.separator+"entity"+ File.separator + "db" + File.separator + moduleName + File.separator +  className + ".java";
             //com.zzjr.service.tourism.biz.domain.entity.db.ld.Activity
         }
 
         if (template.contains ("Mapper.java.vm")) {
-            return packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "repository" + File.separator + "db" + File.separator + moduleName + File.separator +  className + "Mapper.java";
-
+            return "biz"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "repository" + File.separator + "db" + File.separator + moduleName + File.separator +  className + "Mapper.java";
             //com.zzjr.service.tourism.biz.repository.db.ld.DictionariesMapper
         }
 
         if (template.contains ("Service.java.vm")) {
-            return packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "service" + File.separator + "db" + File.separator + moduleName + File.separator + className + "Service.java";
-            //com.zzjr.service.tourism.biz.service.db.ld.IGiftOrderService
+            return "biz"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "service" + File.separator + "db" + File.separator + moduleName + File.separator + className + "Service.java";
+            //com.zzjr.service.tourism.biz.service.db.ld
+        }
+        if (template.contains ("Service.java.ad.vm")) {
+            return "admin"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "admin" + File.separator + "service" + File.separator + "feign" + File.separator + moduleName + File.separator + className + "Service.java";
+            //com.zzjr.service.tourism.admin.service.feign
         }
 
         if (template.contains ("ServiceImpl.java.vm")) {
-            return packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "service" + File.separator + "db" + File.separator + moduleName + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
+            return "biz"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "service" + File.separator + "db" + File.separator + moduleName + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
             //com.zzjr.service.tourism.biz.service.db.ld.impl
         }
 
         if (template.contains ("Controller.java.vm")) {
-            return packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "web" + File.separator + moduleName + File.separator + className + "Controller.java";
-
+            return "biz"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "web" + File.separator + moduleName + File.separator + className + "Controller.java";
             //com.zzjr.service.tourism.biz.web.ld
-
         }
+
+        if (template.contains ("ServiceFallbackImpl.java.ad.vm")) {
+            return "admin"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "admin" + File.separator + "service" + File.separator + "feign" + File.separator +  "fallback" + File.separator + moduleName + File.separator +className + "ServiceFallbackImpl.java";
+            //com.zzjr.service.tourism.admin.service.feign.fallback
+        }
+
+
+        if (template.contains ("Controller.java.ad.vm")) {
+
+            return "admin"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "admin" + File.separator + "web" + File.separator + moduleName + File.separator + className + "Controller.java";
+            //com.zzjr.service.tourism.admin.web.ld
+        }
+        if (template.contains ("DTO.java.ad.vm")) {
+            return "admin"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "admin" + File.separator + "domain" +File.separator+"dto"+  File.separator + moduleName + File.separator +  className + "DTO.java";
+            //com.zzjr.service.tourism.admin.domain.dto.ld.LdChannelDTO
+        }
+        if (template.contains ("Request.java.ad.vm")) {
+            return "admin"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "admin" + File.separator + "domain" +File.separator+"request"+  File.separator + moduleName + File.separator +  className + "Request.java";
+            //com.zzjr.service.tourism.admin.domain.request.ld.LdActivityRequest
+        }
+
+
 
         if (template.contains("list.vue.vm" )) {
-            return "main" + File.separator + "resources" + File.separator + "templates" + File.separator
-                    + "modules" + File.separator + moduleName + File.separator + className.toLowerCase() + ".html";
+            return "vue" + File.separator + moduleName + File.separator + className.toLowerCase()+File.separator + "list.vue";
         }
         if (template.contains("edit.vue.vm" )) {
-            return "main" + File.separator + "resources" + File.separator + "templates" + File.separator
-                    + "modules" + File.separator + moduleName + File.separator + className.toLowerCase() + ".html";
+            return "vue" + File.separator + moduleName + File.separator + className.toLowerCase() +File.separator+ "edit.vue";
         }
 
-
-	/*	if (template.contains("Dao.xml.vm" )) {
-			return "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + moduleName + File.separator + className + "Dao.xml";
-		}
-
-
-		if (template.contains("list.js.vm" )) {
-			return "main" + File.separator + "resources" + File.separator + "statics" + File.separator + "js" + File.separator
-					+ "modules" + File.separator + moduleName + File.separator + className.toLowerCase() + ".js";
-		}
-
-		if (template.contains("menu.sql.vm" )) {
+		if (template.contains("menu.sql.ad.vm" )) {
 			return className.toLowerCase() + "_menu.sql";
-		}*/
+		}
 
         return null;
     }

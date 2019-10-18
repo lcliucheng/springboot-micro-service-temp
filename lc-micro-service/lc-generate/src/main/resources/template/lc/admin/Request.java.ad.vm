@@ -1,0 +1,46 @@
+package ${packagePath}.service.${packagePath2}.admin.domain.request.${moduleName};
+
+
+#if(${hasDateTime})
+import java.time.LocalDateTime;
+#end
+#if(${hasDate})
+import java.time.LocalDate;
+#end
+import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+
+/**
+ * <p>
+ * ${comments}
+ * </p>
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Data
+@ApiModel(value="${className}对象", description="${comments}")
+public class ${className} implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+#foreach ($column in $columns)
+
+    @ApiModelProperty(value = "$column.comments")
+    private $column.attrType $column.attrname;
+#end
+
+
+
+
+
+
+}

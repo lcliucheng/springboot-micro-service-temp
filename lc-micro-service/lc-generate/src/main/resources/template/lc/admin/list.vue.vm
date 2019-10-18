@@ -1,6 +1,17 @@
 <template>
     <div class="app-container">
         <div class="filter-container">
+            <!--时间和下拉框-->
+           <!-- <el-input v-model="listQuery." placeholder="" clearable style="width: 200px;" @keyup.enter.native="handleFilter" />*#
+               <el-select v-model="listQuery.orderState" placeholder="状态" class="filter-item"  clearable style="width: 200px" >
+                   <el-option :value="undefined">全部</el-option>
+                   <el-option v-for="item in ENABLE_STATUS"  :key="item.value" :label="item.label" :value="item.value" />
+               </el-select>
+
+               <div class="filter-item">
+                   <el-date-picker value-format="yyyy-MM-dd HH:mm:ss"  v-model="listQuery.createTime" type="daterange" start-placeholder="创建开始日期" end-placeholder="创建结束日期">
+                   </el-date-picker>
+               </div> -->
 
             <el-button v-if="checkPermission('')"  style="margin-left: 30px;" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
             <el-button v-if="checkPermission('')" style="margin-left: 10px; " type="primary" icon="el-icon-edit" @click="handleCreate">新增</el-button>
@@ -49,7 +60,14 @@
                     page: 1,
                     size: 10,
                 },
-                sortBy:[]
+                sortBy:[],
+                range:null,
+                /*ENABLE_STATUS:[
+                    {value: 0, label: '未支付',tag: 'success'},
+                    {value: 1, label: '支付成功',tag: 'danger'},
+                    {value: 2, label: '确认发货',tag: 'danger'},
+                    {value: 3, label: '发货成功',tag: 'danger'},
+                ]*/
             }
         },
         created() {
@@ -58,14 +76,20 @@
         methods: {
             getList() {
                 this.listLoading = true;
+           /*     if (this.listQuery.createTime && this.listQuery.createTime.length > 0) {
+                    let s="createTime,DATE_TIME,"+this.listQuery.createTime[0]+","+this.listQuery.createTime[1];
+                    this.range=s;
+                    console.log(s);
+                }*/
                 //查询条件
                 let param = {
                     page: this.listQuery.page,
                     size: this.listQuery.size,
                     sort:this.sortBy,
+                    range:this.range
                 };
                 //请求后台接口
-                this.\$axios.get( '/${moduleName}/${pathName}',{params: param,
+                this.${vueSymbolOne}axios.get( '/${moduleName}/${pathName}',{params: param,
                     paramsSerializer: function(params) {
                         //请求前参数处理，主要处理数组类型
                         return bxUtils.preDeal(params);
@@ -74,10 +98,10 @@
                         this.list = response.data.records;
                         this.total = parseInt(response.data.total);
                     }else{
-                        this.\$message({message: response.msg || "查询失败", type: 'error'})
+                        this.${vueSymbolOne}message({message: response.msg || "查询失败", type: 'error'})
                     }
                     this.listLoading = false;
-                })
+                })}
             },
             handleFilter() {
                 this.listQuery.page = 1;
@@ -96,28 +120,28 @@
                 this.handleFilter();
             },
             handleCreate() {
-                this.\$router.push({path:'/${moduleName}/${pathName}/edit'});
+                this.${vueSymbolOne}router.push({path:'/${moduleName}/${pathName}/edit'});
             },
             handleUpdate(row) {
-                this.\$router.push({path:'/${moduleName}/${pathName}/edit',query: {id: row.id}});
+                this.${vueSymbolOne}router.push({path:'/${moduleName}/${pathName}/edit',query: {id: row.id}});
             },
             handleDelete(row) {
-                this.\$confirm('删除记录, 是否继续?', '提示', {
+                this.${vueSymbolOne}confirm('删除记录, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.\$axios.delete( '/${moduleName}/${pathName}/'+row.id).then(response => {
+                    this.${vueSymbolOne}axios.delete( '/${moduleName}/${pathName}/'+row.id).then(response => {
                         if(response.code == 200){
-                            this.\$message({type: 'success', message: '删除成功!'});
+                            this.${vueSymbolOne}message({type: 'success', message: '删除成功!'});
                             this.getList();
                         }else{
-                            this.\$message({type: 'success', message: '删除失败!'});
+                            this.${vueSymbolOne}message({type: 'success', message: '删除失败!'});
                         }
 
                     });
                 }).catch(() => {
-                    this.\$message({
+                    this.${vueSymbolOne}message({
                         type: 'info',
                         message: '已取消删除'
                     });

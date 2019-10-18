@@ -13,7 +13,7 @@
           #if(${velocityCount}%2==1 )
 
           <el-form-item style="margin-bottom: 30px;" label-width="100px" label="$column.attrname"  prop="$column.attrname">
-            <el-input v-model="postForm$column.attrname" style="width: 60%"  placeholder="请输入$column.comments" />
+            <el-input v-model="postForm.$column.attrname" style="width: 60%"  placeholder="请输入$column.comments" />
           </el-form-item>
         #end
       #end
@@ -34,6 +34,7 @@
   </div>
 </template>
 
+<!--suppress JSAnnotator -->
 <script>
   import Sticky from '@/components/Sticky' // 粘性header组件
 
@@ -60,15 +61,12 @@
         rules: {
         #foreach ($column in $columns)
             ${column.attrname}:[
-
-        #if(${column.attrType.indexOf("Integer")}!=-1||${column.attrType.indexOf("Double")}!=-1)
-
-            { type: 'number', message: '${column.comments}必须为数字值',trigger: 'blur' },
-        #end
-
-        #if(${column.attrType.indexOf("Integer")}==-1||${column.attrType.indexOf("Double")}==-1)
-            { max: 999, message: '最大长度为',trigger: 'blur'},
-        #end
+            #if(${column.attrType.indexOf("Integer")}!=-1||${column.attrType.indexOf("Double")}!=-1)
+                { type: 'number', message: '${column.comments}必须为数字值',trigger: 'blur' },
+            #end
+            #if(${column.attrType.indexOf("Integer")}==-1&&${column.attrType.indexOf("Double")}==-1)
+                { max: 999, message: '最大长度为',trigger: 'blur'},
+            #end
             ],
         #end
         }
@@ -85,25 +83,25 @@
     methods: {
       //根据ID查询数据,回显
       findData(id) {
-        this.\$axios.get( '/${moduleName}/${pathName}/'+id).then(response => {
+        this.axios.get( '/${moduleName}/${pathName}/'+id).then(response => {
           if(response.code == 200){
             this.postForm = Object.assign({}, response.data);
             this.postForm.status = 'draft';
           }else{
-            this.$message({message: response.msg, type: 'error'})
+            this.message({message: response.msg, type: 'error'})
           }
-        });
+        })};
       },
       //保存数据
       submitForm(postForm) {
-        this.\$refs[postForm].validate((valid) => {
+        this.${vueSymbolOne}refs[postForm].validate((valid) => {
           if (valid) {
             this.editPost().then(response => {
               if(response.code == 200){
-                this.$message({message: '保存成功', type: 'success'});
+                this.${vueSymbolOne}message({message: '保存成功', type: 'success'});
                   this.draftForm();
               }else{
-                this.$message({message: response.msg, type: 'error'})
+                this.${vueSymbolOne}message({message: response.msg, type: 'error'})
               }
             });
           } else {
@@ -115,14 +113,14 @@
       },
       //取消操作
       draftForm() {
-        bxUtils.closeAppointView(this.\$route, '/${moduleName}/${pathName}');
+        bxUtils.closeAppointView(this.${vueSymbolOne}route, '/${moduleName}/${pathName}');
         this.postForm.status = 'draft'
       },editPost(){
             if(this.postForm.id != null){
-                return this.\$axios.put('/${moduleName}/${pathName}/'+this.postForm.id , JSON.stringify(this.postForm),
+                return this.${vueSymbolOne}axios.put('/${moduleName}/${pathName}/'+this.postForm.id , JSON.stringify(this.postForm),
                         {headers: {'Content-Type': 'application/json;charset-UTF-8'}})
             }else{
-                return this.\$axios.post('/${moduleName}/${pathName}', JSON.stringify(this.postForm),
+                return this.${vueSymbolOne}axios.post('/${moduleName}/${pathName}', JSON.stringify(this.postForm),
                         {headers: {'Content-Type': 'application/json;charset-UTF-8'}})
             }
         },

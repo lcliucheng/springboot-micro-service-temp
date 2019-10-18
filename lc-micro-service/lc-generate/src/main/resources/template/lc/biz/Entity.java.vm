@@ -7,6 +7,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 #if(${hasDateTime})
 import java.time.LocalDateTime;
 #end
+#if(${hasDate})
+import java.time.LocalDate;
+#end
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -31,21 +34,21 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("${tableName}")
-@ApiModel(value="${className}对象", description="")
+@ApiModel(value="${className}对象", description="${comments}")
 public class ${className} extends Model<${className}> {
 
     private static final long serialVersionUID = 1L;
 
-    #foreach ($column in $columns)
+#foreach ($column in $columns)
 
-        #if($column.columnName == $pk.columnName)
-        @TableId(value = "$column.columnName", type = IdType.AUTO)
-        #else
-        @TableField("$column.columnName")
-        #end
+    #if($column.columnName == $pk.columnName)
+    @TableId(value = "$column.columnName", type = IdType.AUTO)
+    #else
+    @TableField("$column.columnName")
+    #end
     @ApiModelProperty(value = "$column.comments")
     private $column.attrType $column.attrname;
-    #end
+#end
 
 
 

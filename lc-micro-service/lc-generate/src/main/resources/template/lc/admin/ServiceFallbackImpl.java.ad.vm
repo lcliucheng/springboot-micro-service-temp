@@ -1,0 +1,37 @@
+package ${packagePath}.service.${packagePath2}.admin.service.feign.fallback;
+
+import ${packagePath}.common.exception.ErrorCode;
+import ${packagePath}.common.response.Response;
+import ${packagePath}.service.${packagePath2}.admin.domain.dto.${moduleName}.${className}DTO;
+import ${packagePath}.service.tourism.admin.domain.dto.PageDTO;
+import ${packagePath}.service.${packagePath2}.admin.service.feign.${className}Service;
+import org.springframework.stereotype.Component;
+import org.springframework.util.MultiValueMap;
+
+@Component
+public class ${className}ServiceFallbackImpl implements ${className}Service {
+    @Override
+    public Response<PageDTO<${className}DTO>> find${className}Page(MultiValueMap<String, Object> multiValueParams) {
+        return Response.failed (ErrorCode.SERVICE_CALL_ERROR);
+    }
+
+    @Override
+    public Response<${className}DTO> find${className}ById(Long id) {
+        return Response.failed (ErrorCode.SERVICE_CALL_ERROR);
+    }
+
+    @Override
+    public Response<${className}DTO> save${className}(${className}DTO ${classname}) {
+        return Response.failed (ErrorCode.SERVICE_CALL_ERROR);
+    }
+
+    @Override
+    public Response<${className}DTO> update${className}ById(Long id, ${className}DTO ${classname}) {
+        return Response.failed (ErrorCode.SERVICE_CALL_ERROR);
+    }
+
+    @Override
+    public Response<Long> delete(Long id) {
+        return Response.failed (ErrorCode.SERVICE_CALL_ERROR);
+    }
+}

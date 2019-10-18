@@ -1,0 +1,116 @@
+package ${packagePath}.service.tourism.admin.web.${moduleName};
+
+import cn.hutool.core.bean.BeanUtil;
+import com.google.common.collect.Lists;
+import ${packagePath}.common.response.Response;
+import ${packagePath}.service.${packagePath2}.admin.domain.dto.${moduleName}.${className}DTO;
+import ${packagePath}.service.${packagePath2}.admin.domain.dto.PageDTO;
+import ${packagePath}.service.${packagePath2}.admin.domain.request.QueryParamRequest;
+import ${packagePath}.service.${packagePath2}.admin.domain.request.${moduleName}.${className}Request;
+import ${packagePath}.service.${packagePath2}.admin.service.feign.${className}Service;
+import ${packagePath}.service.${packagePath2}.admin.utils.AdminUtil;
+import ${packagePath}.validator.group.FindGroup;
+import ${packagePath}.validator.group.InsertGroup;
+import ${packagePath}.validator.group.UpdateGroup;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.MultiValueMap;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
+
+import java.util.Map;
+
+/**
+ * <p>
+ * ${comments}
+ * </p>
+ *
+ * @author generator
+ * @date
+ */
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@Slf4j
+@RestController
+@RequestMapping("/${moduleName}/${pathName}")
+@Api(tags = "${comments}接口")
+@Validated
+public class ${className}Controller {
+
+    private final ${className}Service ${classname}Service;
+
+    public ${className}Controller(final ${className}Service ${classname}Service) {
+        this.${classname}Service = ${classname}Service;
+    }
+
+    /**
+     * 查询${comments}
+     *
+     * @return Response
+     */
+    @GetMapping
+    @ApiOperation(value = "查询${comments}")
+    public Response<PageDTO<${className}DTO>> findPage(@Validated(FindGroup.class)${className}Request request,
+                                                         @ApiIgnore QueryParamRequest param) {
+
+        MultiValueMap<String, Object> multiValueParams = AdminUtil.dealQueryParam (param);
+        Map<String, Object> map = BeanUtil.beanToMap (request);
+        map.forEach ((k, v) -> multiValueParams.put (k, Lists.newArrayList (v)));
+        return ${classname}Service.find${className}Page (multiValueParams);
+    }
+
+    /**
+     * 根据ID查询${comments}
+     *
+     * @return Response
+     */
+    @GetMapping(value = "/{id}")
+    @ApiOperation(value = "根据ID查询${comments}")
+    public Response<${className}DTO> findById(@Validated(FindGroup.class) @PathVariable Long id) {
+
+        return ${classname}Service.find${className}ById (id);
+    }
+
+    /**
+     * 保存${comments}
+     *
+     * @return Response
+     */
+    @PostMapping
+    @ApiOperation(value = "保存${comments}")
+    public Response<${className}DTO> insert(@Validated(InsertGroup.class) @RequestBody ${className}Request request) {
+            ${className}DTO ${classname} = new ${className}DTO ();
+        BeanUtil.copyProperties (request, ${classname});
+        return ${classname}Service.save${className} (${classname});
+    }
+
+    /**
+     * 根据ID修改${comments}
+     *
+     * @return Response
+     */
+    @PutMapping(value = "/{id}")
+    @ApiOperation(value = "根据ID修改${comments}")
+    public Response<LdDictionariesDTO> update(@Validated(UpdateGroup.class) @PathVariable Long id,
+                                              @RequestBody @Validated(UpdateGroup.class) ${className}Request request) {
+
+        ${className}DTO ${classname} = new ${className}DTO ();
+        BeanUtil.copyProperties (request, ${classname});
+        return ${classname}Service.update${className}ById (id, ${classname});
+    }
+
+    /**
+     * 根据ID删除${comments}
+     * @param id  主键ID           .
+     * @return  Response
+     */
+    @DeleteMapping(value = "/{id}")
+    @ApiOperation(value = "根据ID删除${comments}")
+    public Response<Long> delete(@Validated(UpdateGroup.class) @PathVariable Long id){
+
+        return ${classname}Service.delete(id);
+    }
+
+
+}
