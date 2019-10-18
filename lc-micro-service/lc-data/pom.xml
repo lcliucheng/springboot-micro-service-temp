@@ -14,6 +14,9 @@
     <modules>
         <module>lc-data-jdbc</module>
         <module>lc-data-mybatis</module>
+        <module>lc-data-es</module>
+        <module>lc-data-kafka</module>
+        <module>lc-data-redis</module>
     </modules>
 
     <properties>
