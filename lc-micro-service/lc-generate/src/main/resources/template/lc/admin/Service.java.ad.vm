@@ -1,23 +1,23 @@
-package ${packagePath}.service.tourism.admin.service.feign;
+package ${packagePath}.service.${packagePath2}.admin.service.feign.${moduleName};
 
 import ${packagePath}.common.response.Response;
 import ${packagePath}.module.${packagePath2}.biz.consts.BizConstants;
 import ${packagePath}.service.${packagePath2}.admin.domain.dto.${moduleName}.${className}DTO;
 import ${packagePath}.service.${packagePath2}.admin.domain.dto.PageDTO;
-import ${packagePath}.service.${packagePath2}.admin.service.feign.fallback.${className}ServiceFallbackImpl;
+import ${packagePath}.service.${packagePath2}.admin.service.feign.fallback.${moduleName}.${className}ServiceFallbackImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(value = BizConstants.${packagePath3}_BIZ_SERVICE, fallback = ${className}FallbackImpl.class)
-public interface ${packagePath2}Service {
+@FeignClient(value = BizConstants.${packagePath3}_BIZ_SERVICE, fallback = ${className}ServiceFallbackImpl.class)
+public interface ${className}Service {
     /**
      * 查询${comments}列表
      *
      * @param multiValueParams 参数集合
      * @return Response
      */
-    @RequestMapping(value = "/${moduleName}/${className}", method = RequestMethod.GET)
+    @RequestMapping(value = "/${moduleName}/${pathName}", method = RequestMethod.GET)
     Response<PageDTO<${className}DTO>> find${className}Page(@RequestParam MultiValueMap<String, Object> multiValueParams);
 
     /**
@@ -26,26 +26,24 @@ public interface ${packagePath2}Service {
      * @param id 编号
      * @return Response
      */
-    @RequestMapping(value = "/${moduleName}/${className}/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/${moduleName}/${pathName}/{id}", method = RequestMethod.GET)
     Response<${className}DTO> find${className}ById(@PathVariable("id") Long id);
 
     /**
      * 保存ld_dictionaries
      *
-     * @param ldDictionaries
      * @return Response
      */
-    @RequestMapping(value = "/${moduleName}/${className}", method = RequestMethod.POST)
+    @RequestMapping(value = "/${moduleName}/${pathName}", method = RequestMethod.POST)
     Response<${className}DTO> save${className}(@RequestBody ${className}DTO ${classname});
 
     /**
      * 根据ID修改${comments}
      *
      * @param id             编号
-     * @param ldDictionaries
      * @return Response
      */
-    @RequestMapping(value = "/${moduleName}/${className}/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/${moduleName}/${pathName}/{id}", method = RequestMethod.PUT)
     Response<${className}DTO> update${className}ById(@PathVariable("id") Long id, @RequestBody ${className}DTO ${classname});
 
         /**
@@ -54,6 +52,6 @@ public interface ${packagePath2}Service {
         * @param id             编号
         * @return Response
         */
-    @DeleteMapping(value = "/${moduleName}/${className}/{id}")
+    @DeleteMapping(value = "/${moduleName}/${pathName}/{id}")
     Response<Long> delete(@PathVariable("id") Long id);
 }

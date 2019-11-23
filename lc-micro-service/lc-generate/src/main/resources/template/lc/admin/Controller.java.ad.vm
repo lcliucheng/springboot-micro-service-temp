@@ -7,7 +7,7 @@ import ${packagePath}.service.${packagePath2}.admin.domain.dto.${moduleName}.${c
 import ${packagePath}.service.${packagePath2}.admin.domain.dto.PageDTO;
 import ${packagePath}.service.${packagePath2}.admin.domain.request.QueryParamRequest;
 import ${packagePath}.service.${packagePath2}.admin.domain.request.${moduleName}.${className}Request;
-import ${packagePath}.service.${packagePath2}.admin.service.feign.${className}Service;
+import ${packagePath}.service.${packagePath2}.admin.service.feign.${moduleName}.${className}Service;
 import ${packagePath}.service.${packagePath2}.admin.utils.AdminUtil;
 import ${packagePath}.validator.group.FindGroup;
 import ${packagePath}.validator.group.InsertGroup;
@@ -92,7 +92,7 @@ public class ${className}Controller {
      */
     @PutMapping(value = "/{id}")
     @ApiOperation(value = "根据ID修改${comments}")
-    public Response<LdDictionariesDTO> update(@Validated(UpdateGroup.class) @PathVariable Long id,
+    public Response<${className}DTO> update(@Validated(UpdateGroup.class) @PathVariable Long id,
                                               @RequestBody @Validated(UpdateGroup.class) ${className}Request request) {
 
         ${className}DTO ${classname} = new ${className}DTO ();

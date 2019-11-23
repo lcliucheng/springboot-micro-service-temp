@@ -12,8 +12,8 @@ INSERT INTO `zzjr_tourism_admin`.`sys_menu`
 (`id`, `parent_id`, `name`, `level`, `sort_no`, `component`,`menu_page`, `path`, `icon`, `redirect`, `desc`,
 `is_hidden`, `is_offline`, `is_deleted`, `ext`, `created_by`, `created_at`, `last_modified_by`,
 `last_modified_at`, `version`)
-VALUES ((select @menu_id+2),'1174239298204012545', '${comments}管理', '2', '2', 'views/business/${moduleName}/${pathName}/list',
-'views/business/${moduleName}/${pathName}/edit', '${pathName}', 'list@svg', '', '', '1', '0', '0', NULL, '${author}', now(), '${author}', now(), '0');
+VALUES ((select @menu_id+2),'1174239298204012545', '${comments}管理', '2', '2', 'views/business/${moduleName}/${pathName}/edit',
+'views/business/${moduleName}/${pathName}/edit', '${pathName}/edit', 'list@svg', '', '', '1', '0', '0', NULL, '${author}', now(), '${author}', now(), '0');
 
 
 SET @func_id= (SELECT id FROM sys_function ORDER BY id DESC LIMIT 1);

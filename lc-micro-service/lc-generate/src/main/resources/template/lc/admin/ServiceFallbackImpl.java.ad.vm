@@ -1,10 +1,10 @@
-package ${packagePath}.service.${packagePath2}.admin.service.feign.fallback;
+package ${packagePath}.service.${packagePath2}.admin.service.feign.fallback.${moduleName};
 
 import ${packagePath}.common.exception.ErrorCode;
 import ${packagePath}.common.response.Response;
 import ${packagePath}.service.${packagePath2}.admin.domain.dto.${moduleName}.${className}DTO;
 import ${packagePath}.service.tourism.admin.domain.dto.PageDTO;
-import ${packagePath}.service.${packagePath2}.admin.service.feign.${className}Service;
+import ${packagePath}.service.${packagePath2}.admin.service.feign.${moduleName}.${className}Service;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 

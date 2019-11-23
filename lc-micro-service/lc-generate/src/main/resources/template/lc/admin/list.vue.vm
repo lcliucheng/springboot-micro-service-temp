@@ -2,19 +2,23 @@
     <div class="app-container">
         <div class="filter-container">
             <!--时间和下拉框-->
-           <!-- <el-input v-model="listQuery." placeholder="" clearable style="width: 200px;" @keyup.enter.native="handleFilter" />*#
-               <el-select v-model="listQuery.orderState" placeholder="状态" class="filter-item"  clearable style="width: 200px" >
-                   <el-option :value="undefined">全部</el-option>
-                   <el-option v-for="item in ENABLE_STATUS"  :key="item.value" :label="item.label" :value="item.value" />
-               </el-select>
+            <!-- <el-input v-model="listQuery." placeholder="" clearable style="width: 200px;" @keyup.enter.native="handleFilter" />*#
+                <el-select v-model="listQuery.orderState" placeholder="状态" class="filter-item"  clearable style="width: 200px" >
+                    <el-option :value="undefined">全部</el-option>
+                    <el-option v-for="item in ENABLE_STATUS"  :key="item.value" :label="item.label" :value="item.value" />
+                </el-select>
 
-               <div class="filter-item">
-                   <el-date-picker value-format="yyyy-MM-dd HH:mm:ss"  v-model="listQuery.createTime" type="daterange" start-placeholder="创建开始日期" end-placeholder="创建结束日期">
-                   </el-date-picker>
-               </div> -->
+                <div class="filter-item">
+                    <el-date-picker value-format="yyyy-MM-dd HH:mm:ss"  v-model="listQuery.createTime" type="daterange" start-placeholder="创建开始日期" end-placeholder="创建结束日期">
+                    </el-date-picker>
+                </div> -->
 
-            <el-button v-if="checkPermission('')"  style="margin-left: 30px;" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
-            <el-button v-if="checkPermission('')" style="margin-left: 10px; " type="primary" icon="el-icon-edit" @click="handleCreate">新增</el-button>
+            <el-button v-if="checkPermission('')" style="margin-left: 30px;" type="primary" icon="el-icon-search"
+                       @click="handleFilter">搜索
+            </el-button>
+            <el-button v-if="checkPermission('')" style="margin-left: 10px; " type="primary" icon="el-icon-edit"
+                       @click="handleCreate">新增
+            </el-button>
         </div>
 
         <el-table
@@ -26,20 +30,24 @@
                 style="width: 100%;"
                 @sort-change="sortChange">
 
-        #foreach ($column in $columns)
-            <el-table-column label="$column.comments" prop=" $column.attrname" align="center">
-            </el-table-column>
-        #end
+            #foreach ($column in $columns)
+                <el-table-column label="$column.comments" prop="$column.attrname" align="center">
+                </el-table-column>
+            #end
 
-            <el-table-column :label="\$t('table.actions')" align="center" width="230" class-name="small-padding fixed-width">
+            <el-table-column :label="${vueSymbolOne}t('table.actions')" align="center" width="230"
+                             class-name="small-padding fixed-width">
                 <template slot-scope="{row}">
-                    <el-button v-if="checkPermission('')" type="primary" size="mini" @click="handleUpdate(row)">编辑</el-button>
-                    <el-button v-if="checkPermission('')"  size="mini" type="danger" @click="handleDelete(row)">删除</el-button>
+                    <el-button v-if="checkPermission('')" type="primary" size="mini" @click="handleUpdate(row)">编辑
+                    </el-button>
+                    <el-button v-if="checkPermission('')" size="mini" type="danger" @click="handleDelete(row)">删除
+                    </el-button>
                 </template>
             </el-table-column>
         </el-table>
 
-        <pagination align="right"  :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
+        <pagination align="right" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.size"
+                    @pagination="getList"/>
 
     </div>
 </template>
@@ -50,7 +58,7 @@
     import bxUtils from '@/utils/zzjr-bx-utils'
 
     export default {
-        components: { Pagination },
+        components: {Pagination},
         data() {
             return {
                 list: null,
@@ -60,8 +68,8 @@
                     page: 1,
                     size: 10,
                 },
-                sortBy:[],
-                range:null,
+                sortBy: [],
+                range: null,
                 /*ENABLE_STATUS:[
                     {value: 0, label: '未支付',tag: 'success'},
                     {value: 1, label: '支付成功',tag: 'danger'},
@@ -76,54 +84,56 @@
         methods: {
             getList() {
                 this.listLoading = true;
-           /*     if (this.listQuery.createTime && this.listQuery.createTime.length > 0) {
-                    let s="createTime,DATE_TIME,"+this.listQuery.createTime[0]+","+this.listQuery.createTime[1];
-                    this.range=s;
-                    console.log(s);
-                }*/
+                /*     if (this.listQuery.createTime && this.listQuery.createTime.length > 0) {
+                         let s="createTime,DATE_TIME,"+this.listQuery.createTime[0]+","+this.listQuery.createTime[1];
+                         this.range=s;
+                         console.log(s);
+                     }*/
                 //查询条件
                 let param = {
                     page: this.listQuery.page,
                     size: this.listQuery.size,
-                    sort:this.sortBy,
-                    range:this.range
+                    sort: this.sortBy,
+                    range: this.range
                 };
                 //请求后台接口
-                this.${vueSymbolOne}axios.get( '/${moduleName}/${pathName}',{params: param,
-                    paramsSerializer: function(params) {
+                this.${vueSymbolOne}axios.get('/${moduleName}/${pathName}', {
+                    params: param,
+                    paramsSerializer: function (params) {
                         //请求前参数处理，主要处理数组类型
                         return bxUtils.preDeal(params);
-                    }}).then(response => {
-                    if(response.code == 200){
+                    }
+                }).then(response => {
+                    if (response.code == 200) {
                         this.list = response.data.records;
                         this.total = parseInt(response.data.total);
-                    }else{
+                    } else {
                         this.${vueSymbolOne}message({message: response.msg || "查询失败", type: 'error'})
                     }
                     this.listLoading = false;
-                })}
+                })
             },
             handleFilter() {
                 this.listQuery.page = 1;
                 this.getList();
             },
             sortChange(data) {
-                const { prop, order } = data;
+                const {prop, order} = data;
                 this.sortBy = [];
-                if(prop != null){
-                    if(order == 'ascending'){
-                        this.sortBy.push(prop+',asc');
-                    }else{
-                        this.sortBy.push(prop+',desc');
+                if (prop != null) {
+                    if (order == 'ascending') {
+                        this.sortBy.push(prop + ',asc');
+                    } else {
+                        this.sortBy.push(prop + ',desc');
                     }
                 }
                 this.handleFilter();
             },
             handleCreate() {
-                this.${vueSymbolOne}router.push({path:'/${moduleName}/${pathName}/edit'});
+                this.${vueSymbolOne}router.push({path: '/${moduleName}/${pathName}/edit'});
             },
             handleUpdate(row) {
-                this.${vueSymbolOne}router.push({path:'/${moduleName}/${pathName}/edit',query: {id: row.id}});
+                this.${vueSymbolOne}router.push({path: '/${moduleName}/${pathName}/edit', query: {id: row.id}});
             },
             handleDelete(row) {
                 this.${vueSymbolOne}confirm('删除记录, 是否继续?', '提示', {
@@ -131,11 +141,11 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.${vueSymbolOne}axios.delete( '/${moduleName}/${pathName}/'+row.id).then(response => {
-                        if(response.code == 200){
+                    this.${vueSymbolOne}axios.delete('/${moduleName}/${pathName}/' + row.id).then(response => {
+                        if (response.code == 200) {
                             this.${vueSymbolOne}message({type: 'success', message: '删除成功!'});
                             this.getList();
-                        }else{
+                        } else {
                             this.${vueSymbolOne}message({type: 'success', message: '删除失败!'});
                         }
 

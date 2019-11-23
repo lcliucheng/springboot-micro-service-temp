@@ -1,6 +1,7 @@
-package ${packagePath}.tourism.${packagePath2}.mapper;
+package ${packagePath}.service.${packagePath2}.biz.repository.db.${moduleName};
 
-import ${packagePath}.tourism.${packagePath2}.entity.${className};
+
+import ${packagePath}.service.${packagePath2}.biz.domain.entity.db.${moduleName}.${className};
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

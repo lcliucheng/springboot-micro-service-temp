@@ -12,7 +12,7 @@ import ${packagePath}.service.${packagePath2}.biz.domain.entity.db.${moduleName}
  * @email ${email}
  * @since ${datetime}
  */
-public interface ${className}Service extends IService<${className}> {
+public interface I${className}Service extends IService<${className}> {
 
 
 }

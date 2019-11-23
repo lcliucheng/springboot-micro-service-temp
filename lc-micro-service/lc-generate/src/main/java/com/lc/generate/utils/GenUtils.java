@@ -214,7 +214,7 @@ public class GenUtils {
         }
 
         if (template.contains ("Service.java.vm")) {
-            return "biz"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "service" + File.separator + "db" + File.separator + moduleName + File.separator + className + "Service.java";
+            return "biz"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "service" + File.separator + "db" + File.separator + moduleName + File.separator +"I"+ className + "Service.java";
             //com.zzjr.service.tourism.biz.service.db.ld
         }
         if (template.contains ("Service.java.ad.vm")) {
@@ -223,7 +223,7 @@ public class GenUtils {
         }
 
         if (template.contains ("ServiceImpl.java.vm")) {
-            return "biz"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "service" + File.separator + "db" + File.separator + moduleName + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
+            return "biz"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "service" + File.separator + "db" + File.separator + moduleName + File.separator + "impl" + File.separator +className + "ServiceImpl.java";
             //com.zzjr.service.tourism.biz.service.db.ld.impl
         }
 

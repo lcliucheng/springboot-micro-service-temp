@@ -11,7 +11,7 @@
     </parent>
     <groupId>com.lc</groupId>
     <artifactId>lc-micro-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>lc-micro-service</name>
     <description>lc 微服务模板</description>
 
@@ -22,7 +22,7 @@
         <module>lc-data</module>
         <module>lc-common</module>
         <module>lc-auth</module>
-        <module>lcc-ache</module>
+        <module>lc-cahe</module>
         <module>lc-modules</module>
         <module>lc-services</module>
         <module>lc-third</module>
