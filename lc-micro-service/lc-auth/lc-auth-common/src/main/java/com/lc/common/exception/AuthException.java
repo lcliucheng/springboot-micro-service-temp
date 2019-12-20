@@ -1,7 +1,7 @@
 package com.lc.common.exception;
 
-import com.zzjr.common.exception.BaseException;
-import com.zzjr.common.exception.ErrorInfo;
+import com.lc.exception.BaseException;
+import com.lc.exception.ErrorInfo;
 
 /**
  * 授权异常

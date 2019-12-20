@@ -19,6 +19,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.lc</groupId>
+            <artifactId>lc-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
         </dependency>
@@ -29,15 +35,15 @@
         </dependency>
 
         <dependency>
-            <groupId>com.zzjr</groupId>
-            <artifactId>zzjr-data-redis</artifactId>
+            <groupId>com.lc</groupId>
+            <artifactId>lc-data-redis</artifactId>
             <version>${project.version}</version>
             <optional>true</optional>
         </dependency>
 
         <dependency>
-            <groupId>com.zzjr</groupId>
-            <artifactId>zzjr-web</artifactId>
+            <groupId>com.lc</groupId>
+            <artifactId>lc-web</artifactId>
             <version>${project.version}</version>
             <optional>true</optional>
         </dependency>

@@ -5,7 +5,7 @@
     <parent>
         <artifactId>lc-micro-service</artifactId>
         <groupId>com.lc</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -14,7 +14,6 @@
     <modules>
         <module>lc-service-xx-admin</module>
         <module>lc-service-xx-app</module>
-        <module>lc-service-xx-biz</module>
         <module>lc-service-xx-sms</module>
     </modules>
 

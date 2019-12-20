@@ -28,6 +28,8 @@
         <module>lc-third</module>
         <module>lc-validator</module>
         <module>lc-web</module>
+        <module>lc-domain</module>
+        <module>lc-common-services</module>
     </modules>
 
     <properties>
@@ -54,7 +56,7 @@
         <fastjson.version>1.2.45</fastjson.version>
         <mybatis-plus-boot-starter.version>3.1.1</mybatis-plus-boot-starter.version>
         <mybatis-ehcache.version>1.1.0</mybatis-ehcache.version>
-
+        <mybatis-dynamic.version>2.5.3</mybatis-dynamic.version>
         <java-jwt.version>3.2.0</java-jwt.version>
 
         <redisson.version>3.10.7</redisson.version>
@@ -162,6 +164,12 @@
                 <artifactId>mybatis-plus-generator</artifactId>
                 <version>${mybatis-plus-boot-starter.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${mybatis-dynamic.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.mybatis.caches</groupId>
                 <artifactId>mybatis-ehcache</artifactId>

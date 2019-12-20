@@ -52,4 +52,23 @@ public interface TokenStore {
      */
     boolean deleteToken(String userId);
 
+
+
+    /**
+     * 保存凭证(FST格式存储)
+     *
+     * @param jwtToken JwtToken
+     * @return boolean
+     */
+    boolean saveTokenFst(JwtToken jwtToken);
+
+    /**
+     * 获取凭证(FST格式存储)
+     *
+     * @param userId 用户编号
+     * @param scope  作用域
+     * @return JwtToken
+     */
+    JwtToken getTokenFst(String userId, String scope);
+
 }

@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * 是否枚举类
  *
- * @author Tortoise
+ * @author liucheng
  * @since 2019-04-13
  */
 public enum YesOrNo {
