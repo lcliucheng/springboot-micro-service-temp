@@ -6,6 +6,7 @@ import com.lc.common.jwt.JwtToken;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 import org.redisson.codec.FstCodec;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -25,7 +26,7 @@ public class RedisTokenStore implements TokenStore {
     private final RedissonClient redissonClient;
     private final AuthProperties authProperties;
 
-    public RedisTokenStore(@Nullable final RedissonClient redissonClient,
+    public RedisTokenStore(@Nullable @Lazy final RedissonClient redissonClient,
                            @Nullable final AuthProperties authProperties) {
         this.redissonClient = redissonClient;
         this.authProperties = authProperties;

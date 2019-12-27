@@ -16,7 +16,7 @@ import java.util.Objects;
  * 通用返回对象，所有http接口都必须返回此对象
  *
  * @author liucheng
- * @since 2019-04-15
+ * @since 2019-12-15
  */
 @Data
 @AllArgsConstructor

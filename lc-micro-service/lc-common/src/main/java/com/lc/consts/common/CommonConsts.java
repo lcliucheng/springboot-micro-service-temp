@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * 常量
  *
  * @author liucheng
- * @since 2019-04-28
+ * @since 2019-12-28
  */
 public interface CommonConsts {
 

@@ -2,7 +2,7 @@ package com.lc.data.mybatis.constants;
 
 /**
  *  数据源常量
- * @author daijs
+ * @author liucheng
  * @since 2019/11/5 15:03
  */
 public interface DataSourceType {

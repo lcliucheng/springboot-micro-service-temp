@@ -13,7 +13,7 @@ import java.util.Map;
  * 基础字段
  *
  * @author liucheng
- * @since 2019-05-02
+ * @since 2019-12-24
  */
 @Data
 public abstract class BaseMiniEntity implements Serializable {
@@ -21,11 +21,11 @@ public abstract class BaseMiniEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "扩展字段", hidden = true)
-    @TableField(value = "ext", el = "ext, typeHandler=com.zzjr.data.mybatis.handler.JsonMapTypeHandler")
+    @TableField(value = "ext", el = "ext, typeHandler=com.lc.data.mybatis.handler.JsonMapTypeHandler")
     private Map<String, Object> ext;
 
     @ApiModelProperty(value = "创建时间", hidden = true)
-    @TableField(value = "created_at",el = "createdAt, typeHandler = com.zzjr.data.mybatis.handler.LocalDateTimeTypeHandler", fill = FieldFill.INSERT)
+    @TableField(value = "created_at",el = "createdAt, typeHandler = com.lc.data.mybatis.handler.LocalDateTimeTypeHandler", fill = FieldFill.INSERT)
     private LocalDateTime createdAt;
 
 }

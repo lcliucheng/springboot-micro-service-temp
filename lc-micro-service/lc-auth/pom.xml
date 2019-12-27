@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>lc-auth-common</module>
-        <module>lc-auth-service</module>
     </modules>
 
     <properties>

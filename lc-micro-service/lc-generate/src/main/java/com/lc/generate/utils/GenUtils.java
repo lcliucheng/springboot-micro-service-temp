@@ -205,51 +205,51 @@ public class GenUtils {
 
         if (template.contains ("Entity.java.vm")) {
             return "biz"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "domain" +File.separator+"entity"+ File.separator + "db" + File.separator + moduleName + File.separator +  className + ".java";
-            //com.zzjr.service.tourism.biz.domain.entity.db.ld.Activity
+            //com.lc.service.tourism.biz.domain.entity.db.ld.Activity
         }
 
         if (template.contains ("Mapper.java.vm")) {
             return "biz"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "repository" + File.separator + "db" + File.separator + moduleName + File.separator +  className + "Mapper.java";
-            //com.zzjr.service.tourism.biz.repository.db.ld.DictionariesMapper
+            //com.lc.service.tourism.biz.repository.db.ld.DictionariesMapper
         }
 
         if (template.contains ("Service.java.vm")) {
             return "biz"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "service" + File.separator + "db" + File.separator + moduleName + File.separator +"I"+ className + "Service.java";
-            //com.zzjr.service.tourism.biz.service.db.ld
+            //com.lc.service.tourism.biz.service.db.ld
         }
         if (template.contains ("Service.java.ad.vm")) {
             return "admin"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "admin" + File.separator + "service" + File.separator + "feign" + File.separator + moduleName + File.separator + className + "Service.java";
-            //com.zzjr.service.tourism.admin.service.feign
+            //com.lc.service.tourism.admin.service.feign
         }
 
         if (template.contains ("ServiceImpl.java.vm")) {
             return "biz"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "service" + File.separator + "db" + File.separator + moduleName + File.separator + "impl" + File.separator +className + "ServiceImpl.java";
-            //com.zzjr.service.tourism.biz.service.db.ld.impl
+            //com.lc.service.tourism.biz.service.db.ld.impl
         }
 
         if (template.contains ("Controller.java.vm")) {
             return "biz"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "biz" + File.separator + "web" + File.separator + moduleName + File.separator + className + "Controller.java";
-            //com.zzjr.service.tourism.biz.web.ld
+            //com.lc.service.tourism.biz.web.ld
         }
 
         if (template.contains ("ServiceFallbackImpl.java.ad.vm")) {
             return "admin"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "admin" + File.separator + "service" + File.separator + "feign" + File.separator +  "fallback" + File.separator + moduleName + File.separator +className + "ServiceFallbackImpl.java";
-            //com.zzjr.service.tourism.admin.service.feign.fallback
+            //com.lc.service.tourism.admin.service.feign.fallback
         }
 
 
         if (template.contains ("Controller.java.ad.vm")) {
 
             return "admin"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "admin" + File.separator + "web" + File.separator + moduleName + File.separator + className + "Controller.java";
-            //com.zzjr.service.tourism.admin.web.ld
+            //com.lc.service.tourism.admin.web.ld
         }
         if (template.contains ("DTO.java.ad.vm")) {
             return "admin"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "admin" + File.separator + "domain" +File.separator+"dto"+  File.separator + moduleName + File.separator +  className + "DTO.java";
-            //com.zzjr.service.tourism.admin.domain.dto.ld.LdChannelDTO
+            //com.lc.service.tourism.admin.domain.dto.ld.LdChannelDTO
         }
         if (template.contains ("Request.java.ad.vm")) {
             return "admin"+File.separator+packagePath + "service" + File.separator + mainPath2 + File.separator + "admin" + File.separator + "domain" +File.separator+"request"+  File.separator + moduleName + File.separator +  className + "Request.java";
-            //com.zzjr.service.tourism.admin.domain.request.ld.LdActivityRequest
+            //com.lc.service.tourism.admin.domain.request.ld.LdActivityRequest
         }
 
 

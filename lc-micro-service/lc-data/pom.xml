@@ -17,6 +17,7 @@
         <module>lc-data-es</module>
         <module>lc-data-kafka</module>
         <module>lc-data-redis</module>
+        <module>lc-data-jpa</module>
     </modules>
 
     <properties>

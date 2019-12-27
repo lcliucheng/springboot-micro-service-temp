@@ -36,7 +36,7 @@ import java.util.TimeZone;
  * <p> 线程安全的Json工具类 </p>
  *
  * @author liucheng
- * @since 2019-04-15
+ * @since 2019-12-15
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class JsonUtil {
@@ -54,9 +54,11 @@ public final class JsonUtil {
         objectMapper.setSerializationInclusion (JsonInclude.Include.NON_NULL);
 
         //序列化处理
-        objectMapper.configure (JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
-        objectMapper.configure (JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER, true);
-        objectMapper.configure (JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
+        objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
+        objectMapper.configure(JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER, true);
+        objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
+
+
 
         //去掉默认的时间戳格式
         objectMapper.configure (SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);

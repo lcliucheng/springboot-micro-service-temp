@@ -5,11 +5,11 @@
     <parent>
         <artifactId>lc-micro-service</artifactId>
         <groupId>com.lc</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <groupId>com.lc</groupId>
     <artifactId>lc-generate</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>lc-generate</name>
     <description>Demo project for Spring Boot</description>
 
@@ -18,10 +18,16 @@
         <mybatis.spring.boot.version>2.0.0</mybatis.spring.boot.version>
         <pagehelper.spring.boot.version>1.2.5</pagehelper.spring.boot.version>
         <velocity.version>1.7</velocity.version>
+        <druid.version>1.0.28</druid.version>
     </properties>
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

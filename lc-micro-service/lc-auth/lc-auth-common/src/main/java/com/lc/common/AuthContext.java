@@ -3,6 +3,7 @@ package com.lc.common;
 
 import com.lc.common.jwt.JwtToken;
 
+
 /**
  * 授权凭证上下文
  *
@@ -41,5 +42,8 @@ public class AuthContext {
     public static void clear() {
         threadLocal.remove();
     }
+
+
+
 
 }

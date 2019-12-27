@@ -18,17 +18,12 @@
     <modules>
         <module>lc-generate</module>
         <module>lc-data</module>
-        <module>lc-data</module>
-        <module>lc-data</module>
         <module>lc-common</module>
         <module>lc-auth</module>
-        <module>lc-cahe</module>
-        <module>lc-modules</module>
         <module>lc-services</module>
         <module>lc-third</module>
         <module>lc-validator</module>
         <module>lc-web</module>
-        <module>lc-domain</module>
         <module>lc-common-services</module>
     </modules>
 
@@ -234,6 +229,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>asm</artifactId>
+                    <groupId>org.ow2.asm</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -282,14 +283,7 @@
     </dependencies>
 
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+
 
     <repositories>
         <repository>

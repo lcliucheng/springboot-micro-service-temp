@@ -7,9 +7,9 @@ import com.lc.common.config.AuthProperties;
 import com.lc.common.jwt.JwtToken;
 import com.lc.common.jwt.JwtTokenUtils;
 import com.lc.common.jwt.store.TokenStore;
-import com.zzjr.common.exception.ErrorCode;
-import com.zzjr.common.response.Response;
-import com.zzjr.service.common.utils.WebUtils;
+import com.lc.exception.ErrorCode;
+import com.lc.response.Response;
+import com.lc.web.utils.WebUtils;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.Nullable;
@@ -48,37 +48,42 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        Assert.notNull (authProperties, "AuthProperties不能为空");
-        Assert.notNull (tokenStore, "TokenStore不能为空");
-        Assert.notNull (jwtTokenUtils, "JwtTokenUtils不能为空");
-        String token = request.getParameter (authProperties.getHeader ());
-        if (StrUtil.isBlank (token)) {
-            token = request.getHeader (authProperties.getHeader ());
+        Assert.notNull(authProperties, "AuthProperties不能为空");
+        Assert.notNull(tokenStore, "TokenStore不能为空");
+        Assert.notNull(jwtTokenUtils, "JwtTokenUtils不能为空");
+        String token = request.getParameter(authProperties.getHeader());
+        if (StrUtil.isBlank(token)) {
+            token = request.getHeader(authProperties.getHeader());
         }
 
-        if (StrUtil.isNotBlank (token)) {
+        if (StrUtil.isNotBlank(token)) {
             try {
-                Claims claims = jwtTokenUtils.parse (token);
-                JwtToken<Object> jwtToken = tokenStore.getToken (claims.getAudience (), claims.getSubject ());
-                if (!Objects.isNull (jwtToken) && Objects.equals (jwtToken.getId (), claims.getId ())) {
-                    if (authProperties.isRelet ()) {
-                        tokenStore.reletToken (jwtToken);
-                    }
-                    AuthContext.setJwtToken (jwtToken);
+                Claims claims = jwtTokenUtils.parse(token);
+                JwtToken<Object> jwtToken;
+                if(StrUtil.isNotBlank(claims.getIssuer()) && claims.getIssuer().contains("Admin")){
+                    jwtToken = tokenStore.getTokenFst(claims.getAudience(), claims.getSubject());
+                }else{
+                    jwtToken = tokenStore.getToken(claims.getAudience(), claims.getSubject());
                 }
-            } catch (Exception e) {
-                log.warn (String.format ("凭证异常[%s]", token), e);
-                WebUtils.write (response, Response.failed (ErrorCode.UNAUTHORIZED.getValue (), "登录已失效，请重新登录"));
+                if (!Objects.isNull(jwtToken) && Objects.equals(jwtToken.getId(), claims.getId())) {
+                    if (authProperties.isRelet()) {
+                        tokenStore.reletToken(jwtToken);
+                    }
+                    AuthContext.setJwtToken(jwtToken);
+                }
+            }catch (Exception e){
+                log.warn(String.format("凭证异常[%s]",token),e);
+                WebUtils.write(response, Response.failed(ErrorCode.UNAUTHORIZED.getValue(),"登录已失效，请重新登录"));
                 return false;
             }
         }
 
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
-            if (handlerMethod.hasMethodAnnotation (Signed.class)
-                    || handlerMethod.getMethod ().getDeclaringClass ().isAnnotationPresent (Signed.class)) {
-                if (Objects.isNull (AuthContext.getJwtToken ())) {
-                    WebUtils.write (response, Response.failed (ErrorCode.UNAUTHORIZED.getValue (), "登录已失效，请重新登录"));
+            if (handlerMethod.hasMethodAnnotation(Signed.class)
+                    || handlerMethod.getMethod().getDeclaringClass().isAnnotationPresent(Signed.class)) {
+                if (Objects.isNull(AuthContext.getJwtToken())) {
+                    WebUtils.write(response, Response.failed(ErrorCode.UNAUTHORIZED.getValue(),"登录已失效，请重新登录"));
                     return false;
                 }
             }

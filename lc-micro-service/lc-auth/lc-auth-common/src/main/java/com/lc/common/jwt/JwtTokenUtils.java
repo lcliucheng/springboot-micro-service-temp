@@ -2,8 +2,8 @@ package com.lc.common.jwt;
 
 import com.google.common.collect.Maps;
 import com.lc.common.exception.AuthException;
-import com.zzjr.common.exception.ErrorCode;
-import com.zzjr.common.exception.ErrorInfo;
+import com.lc.exception.ErrorCode;
+import com.lc.exception.ErrorInfo;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

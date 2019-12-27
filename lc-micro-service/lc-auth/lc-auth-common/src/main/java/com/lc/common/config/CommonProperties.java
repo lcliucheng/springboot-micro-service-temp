@@ -24,7 +24,7 @@ public class CommonProperties {
 
     private Map<String,String> smsSignMap;
 
-    @Value("${zzjr.tourism.sms.notify.deal.num:200}")
+    @Value("${lc.tourism.sms.notify.deal.num:200}")
     private String smsNotifyDealNum;
 
     /**
@@ -37,7 +37,7 @@ public class CommonProperties {
      */
     private List<Map<String,Map<String,String>>> channelPriceList;
 
-    @Value("${zzjr.tourism.sms.fix.channel:}")
+    @Value("${lc.tourism.sms.fix.channel:}")
     public void setFixChannelMap(String fixChannel) {
         Map<String, String> map = Maps.newHashMap();
         if(StrUtil.isNotBlank(fixChannel)){
@@ -57,19 +57,19 @@ public class CommonProperties {
 
 
 
-    @Value("${zzjr.tourism.sms.sign}")
+    @Value("${lc.tourism.sms.sign}")
     public void setSmsSignMap(String pkgPlatform) {
         Map<String, String> map = getStringToMap(pkgPlatform);
         this.smsSignMap = map;
     }
 
 
-    @Value("${zzjr.tourism.pkg-platform}")
+    @Value("${lc.tourism.pkg-platform}")
     public void setFileNameExtension(String pkgPlatform) {
         this.pkgPlatformMap = getStringToMap(pkgPlatform);
     }
 
-    @Value("${zzjr.tourism.api.card-type}")
+    @Value("${lc.tourism.api.card-type}")
     public void setApiCardTypeMap(String apiCardType) {
         this.apiCardType = getStringToMap(apiCardType);
     }
@@ -87,7 +87,7 @@ public class CommonProperties {
         return map;
     }
 
-    @Value("${zzjr.tourism.channel.price:}")
+    @Value("${lc.tourism.channel.price:}")
     public void setChannelPriceList(String price) {
         List<Map<String,Map<String,String>>> list = Lists.newArrayList();
         if(StrUtil.isNotBlank(price)){

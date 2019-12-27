@@ -20,37 +20,37 @@ public class AuthProperties {
     /**
      * 发行人
      */
-    @Value("${zzjr.auth.issuer:zzjr}")
+    @Value("${lc.auth.issuer:lcAdmin}")
     private String issuer;
 
     /**
      * 请求头
      */
-    @Value("${zzjr.auth.header:Authorization}")
+    @Value("${lc.auth.header:Authorization}")
     private String header;
 
     /**
      * 过期时间
      */
-    @Value("${zzjr.auth.expiresIn:7200}")
+    @Value("${lc.auth.expiresIn:7200}")
     private Integer expiresIn;
 
     /**
      * 续租，如果续租，每次操作之后重置过期时间，模拟session过期,0:不续租 1：续租
      */
-    @Value("${zzjr.auth.relet:0}")
+    @Value("${lc.auth.relet:0}")
     private Integer relet;
 
     /**
      * 登录失败前缀
      */
-    @Value("${zzjr.auth.loginFailPrefix:loginFailPrefix}")
+    @Value("${lc.auth.loginFailPrefix:loginFailPrefix}")
     private String loginFailPrefix;
 
     /**
      * 登录失败次数
      */
-    @Value("${zzjr.auth.loginFailNum:5}")
+    @Value("${lc.auth.loginFailNum:5}")
     private Integer loginFailNum;
 
     /**
