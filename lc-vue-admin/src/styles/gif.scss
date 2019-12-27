@@ -1,0 +1,16 @@
+.hiddenOverText {
+      max-height: 70px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      position: relative;
+      line-height: 23px;
+    }
+    .overText {
+      position: absolute;
+      bottom: 0px;
+      content: '...';
+      right: -8px;
+    }
+    .noText {
+      width: 100% !important;
+    }
