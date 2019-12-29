@@ -12,6 +12,7 @@
 	<name>Apollo ConfigService</name>
 	<properties>
 		<github.path>${project.artifactId}</github.path>
+		<skipTests>true</skipTests>
 	</properties>
 	<dependencies>
 		<!-- apollo -->

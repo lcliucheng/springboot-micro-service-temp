@@ -8,7 +8,7 @@ ctrip:
   appid: 100003171
 
 server:
-  port: 8080
+  port: 8089
 
 logging:
-  file: /opt/logs/100003171/apollo-configservice.log
+  file: /opt/logs/2019-12-28/apollo-configservice.log

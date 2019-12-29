@@ -100,15 +100,12 @@
 </template>
 
 <script>
-
-
   import Pagination from '@/components/Pagination' //重写分页插件
   import bxUtils from '@/utils/zzjr-bx-utils'
   import {DISABLE_STATUS, constantFormat, constantTag, changeStatus} from '@/utils/constant'
   import iconView from '@/views/svg-icons/index'
   import axios from 'axios'
   import {MessageBox, Message} from 'element-ui'
-
   export default {
     components: {Pagination,iconView},
     data() {
@@ -117,7 +114,7 @@
         constantTag,
         changeStatus,
         DISABLE_STATUS,
-        list: null,
+        list: [],
         total: 0,
         listLoading: true,
         listQuery: {
@@ -160,9 +157,7 @@
                 this.$message({message: response.msg || '保存失败', type: 'error'})
               }
           });
-
           this.selectIcon={id:null,name:null,type:null};
-
         },
         deep:true
       }
@@ -185,15 +180,14 @@
           paramsSerializer: function (params) {
             //请求前参数处理，主要处理数组类型
             return bxUtils.preDeal(params);
-
           }
         }).then(response => {
-
           let result = response.data;
           if (response.code == 200) {
             let records = result.records;
             for (let i = 0; i < records.length ; i++) {
               let icon = records[i]['icon'];
+             
               if(icon.indexOf("@") != -1){
                 let iconSp = icon.split("@");
                 records[i]['icon'] = iconSp[0];
@@ -250,7 +244,6 @@
             } else {
               this.$message({type: 'success', message: response.msg || '删除失败!'});
             }
-
           });
         }).catch(() => {
           this.$message({
@@ -272,7 +265,6 @@
           paramsSerializer: function (params) {
             //请求前参数处理，主要处理数组类型
             return bxUtils.preDeal(params);
-
           }}).then(response => {
           if(response.code == 200){
             if(response.data){
@@ -303,5 +295,4 @@
     color: #24292e;
     cursor: pointer;
   }
-
 </style>
